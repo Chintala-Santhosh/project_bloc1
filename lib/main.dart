@@ -1,12 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:project_bloc1/repo/home_repository.dart';
 import 'base_state.dart';
 import 'blocsfolder/home_bloc.dart';
 import 'home/home_events.dart';
-import 'home2.dart';
 import 'model/user_modal.dart';
 
 void main(){
@@ -71,7 +68,7 @@ class Home2 extends StatelessWidget {
           }
           if( state is Loaded){
             List<UserModel2> userlist=state.users;
-            print(userlist);
+            print("userlist::${userlist}");
             return FutureBuilder<UserModel2>(
                 future:null,
                 builder: ((context,snapshot){
@@ -86,9 +83,12 @@ class Home2 extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               ListTile(
-                                title: Text(userlist[index].last_name),
+                                title: Text(userlist[index].first_name),
 
                                 subtitle: Text(userlist[index].last_name),
+                                trailing: CircleAvatar(
+                                  backgroundImage: NetworkImage(userlist[index].avatar),
+                                ),
                               ),
                             ],
                           ),

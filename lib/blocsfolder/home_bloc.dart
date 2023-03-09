@@ -13,7 +13,7 @@ class HomeBloc extends Bloc<HomeEvent,BaseState> {
       print("first state");
       try{
         final users = await _repository.getUsers();
-        emit(Loaded(users!));
+        emit(Loaded(users));
       }catch(e){
         emit(Error(e.toString()));
       }
