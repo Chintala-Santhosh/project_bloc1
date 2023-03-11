@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:project_bloc1/model/updare_employee_response_model.dart';
+import 'package:project_bloc1/model/update_employee_response_model.dart';
 import 'package:project_bloc1/model/employee_request_model.dart';
 import '../app_logs.dart';
 import '../model/employee_details_response.dart';

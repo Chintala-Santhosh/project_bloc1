@@ -1,5 +1,5 @@
 
-import 'package:project_bloc1/model/updare_employee_response_model.dart';
+import 'package:project_bloc1/model/update_employee_response_model.dart';
 import 'package:project_bloc1/model/user_modal.dart';
 import 'package:equatable/equatable.dart';
 class BaseState extends Equatable {

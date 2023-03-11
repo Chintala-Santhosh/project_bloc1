@@ -7,7 +7,7 @@ import 'package:project_bloc1/model/user_modal.dart';
 import '../base_state.dart';
 import '../home/home_events.dart';
 import '../model/employee_details_response.dart';
-import '../model/updare_employee_response_model.dart';
+import '../model/update_employee_response_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
