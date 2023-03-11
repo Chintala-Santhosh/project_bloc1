@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_bloc1/home2.dart';
 import 'package:project_bloc1/repo/home_repository.dart';
+import 'package:project_bloc1/screens/add_employee_screen.dart';
+import 'package:project_bloc1/screens/home_screen.dart';
 import 'base_state.dart';
 import 'blocsfolder/home_bloc.dart';
 import 'home/home_events.dart';
@@ -9,29 +12,15 @@ import 'model/user_modal.dart';
 void main(){
   // WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
-  runApp(MaterialApp(home: MyApp()));}
+  runApp(
+      MaterialApp(
+          home: MyApp(),
+              debugShowCheckedModeBanner: false,
+      )
+  );
+}
 
 
-// class MyApp extends StatefulWidget {
-//   @override
-//   State<MyApp> createState() => _MyAppState();
-// }
-//
-// class _MyAppState extends State<MyApp> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return StreamProvider<UserModel1?>.value(
-//       value: AuthServices().user,
-//       initialData: null,
-//       catchError: (context, error) {
-//
-//       },
-//       child: Wrapper(),
-//     );
-//
-//
-//   }
-// }
 
 class MyApp extends StatefulWidget {
   @override
@@ -41,77 +30,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context)=> HomeRepository(),
-      child: Home2(),
-    );
+    return const AddEmployeeScreen();
 
 
   }
 
-}
-class Home2 extends StatelessWidget {
-  Home2({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create:(context)=>HomeBloc(RepositoryProvider.of<HomeRepository>(context),
-      )..add(GetHomePageDetail()),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("bloC"),
-        ),
-        body: BlocBuilder<HomeBloc,BaseState>(builder: (context,state){
-          if( state is Loading){
-            return const Center(child: CircularProgressIndicator(),);
-          }
-          if( state is Loaded){
-            List<UserModel2> userlist=state.users;
-            print("userlist::${userlist}");
-            return FutureBuilder<UserModel2>(
-                future:null,
-                builder: ((context,snapshot){
-                  if(snapshot.data != null){
-                    print(snapshot.data);
-                  }
-                  return ListView.builder(
-                      itemCount: userlist.length,
-                      itemBuilder: (_,index){
-                        return Card(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              ListTile(
-                                title: Text(userlist[index].first_name),
-
-                                subtitle: Text(userlist[index].last_name),
-                                trailing: CircleAvatar(
-                                  backgroundImage: NetworkImage(userlist[index].avatar),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-                  );
-                }
-                ));
-
-          }
-          if(state is Error) {
-            return Center(child: Text('error'),);
-          }
-          return Container();
-
-        }
-        ),
-      ),
-    );
-
-
-
-  }
 }
 
 

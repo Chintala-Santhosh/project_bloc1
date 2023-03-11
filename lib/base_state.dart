@@ -1,32 +1,57 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
+
+import 'package:project_bloc1/model/updare_user_response_model.dart';
 import 'package:project_bloc1/model/user_modal.dart';
-
-
-@immutable
-abstract class BaseState extends Equatable {
+import 'package:equatable/equatable.dart';
+class BaseState extends Equatable {
+  //abstract
   const BaseState();
+  @override
+  String toString() => 'BaseState';
+  @override
+  List<Object> get props => [];
+
 }
 
 class Loading extends BaseState {
   @override
-  List<Object?> get props => [];
+  String toString() => 'Loading';
 
+}
+
+class Init extends BaseState {
+  @override
+  String toString() => 'Init';
 }
 class Loaded extends BaseState {
   Loaded(this.users);
   final List<UserModel2> users;
+  @override
+  String toString() => 'Loaded';
+
+}
+class Loaded1 extends BaseState {
+   Loaded1(this.updateUsersList);
+  final UpdateUserResponse updateUsersList;
+  @override
+  String toString() => 'Loaded1';
+
+}
+class DataLoaded<T> extends BaseState {
+  T data;
+  String event;
+
+  DataLoaded({required this.data, required this.event});
 
   @override
-  List<Object?> get props => [users];
+  String toString() => 'DataLoaded';
 
 }
 class Error extends BaseState {
   Error(this.error);
   final String error;
-
   @override
-  List<Object?> get props => [error];
+  String toString() => 'Error';
+
 
 }
 // class BaseState extends Equatable {
@@ -44,18 +69,6 @@ class Error extends BaseState {
 // }
 
 
-class DataLoaded<T> extends BaseState {
-  T data;
-  String event;
-
-  DataLoaded({required this.data, required this.event});
-
-  @override
-  String toString() => 'DataLoaded';
-
-  @override
-  List<Object?> get props => [];
-}
 
 
 class BaseError extends BaseState {
@@ -66,6 +79,4 @@ class BaseError extends BaseState {
   @override
   String toString() => 'Error';
 
-  @override
-  List<Object> get props => [errorMessage];
 }
