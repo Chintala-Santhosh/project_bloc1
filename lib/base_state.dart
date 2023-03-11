@@ -1,5 +1,5 @@
 
-import 'package:project_bloc1/model/updare_user_response_model.dart';
+import 'package:project_bloc1/model/updare_employee_response_model.dart';
 import 'package:project_bloc1/model/user_modal.dart';
 import 'package:equatable/equatable.dart';
 class BaseState extends Equatable {
@@ -31,7 +31,7 @@ class Loaded extends BaseState {
 }
 class Loaded1 extends BaseState {
    Loaded1(this.updateUsersList);
-  final UpdateUserResponse updateUsersList;
+  final UpdateEmployeeResponse updateUsersList;
   @override
   String toString() => 'Loaded1';
 

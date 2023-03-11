@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:project_bloc1/model/updare_user_response_model.dart';
-import 'package:project_bloc1/model/update_user_request_model.dart';
+import 'package:project_bloc1/model/updare_employee_response_model.dart';
+import 'package:project_bloc1/model/employee_request_model.dart';
 import '../app_logs.dart';
 import '../model/employee_details_response.dart';
 import '../model/user_modal.dart';
@@ -18,25 +18,38 @@ class HomeRepository{
       throw Exception(response.reasonPhrase);
     }
   }
-  Future<UpdateUserResponse> updateUsers(UpdateUserRequest request)async{
-    http.Response response = await http.put(Uri.parse("https://reqres.in/api/users/"),body: request.toJson());
-    print("statusCode::${response.statusCode}");
-    if (response.statusCode == 200){
-        var result = jsonDecode(response.body);
-        AppLog.d("Response::${result.toString()}");
-      return UpdateUserResponse.fromJson(result);
-    }else{
-      throw Exception(response.reasonPhrase);
-    }
 
-  }
-  Future<EmployeesDetailsResponse> addEmployeesDetails(UpdateUserRequest request)async{
+  Future<EmployeesDetailsResponse> addEmployeesDetails(EmployeeRequestModel request)async{
     http.Response response = await http.post(Uri.parse("https://reqres.in/api/users/"),body: request.toJson());
     print("statusCode::${response.statusCode}");
     if (response.statusCode == 201){
       var result = jsonDecode(response.body);
       AppLog.d("Response::${result.toString()}");
       return EmployeesDetailsResponse.fromJson(result);
+    }else{
+      throw Exception(response.reasonPhrase);
+    }
+
+  }
+  Future<UpdateEmployeeResponse> updateEmployees(EmployeeRequestModel request)async{
+    http.Response response = await http.put(Uri.parse("https://reqres.in/api/users/2"),body: request.toJson());
+    print("statusCode::${response.statusCode}");
+    if (response.statusCode == 200){
+      var result = jsonDecode(response.body);
+      AppLog.d("Response::${result.toString()}");
+      return UpdateEmployeeResponse.fromJson(result);
+    }else{
+      throw Exception(response.reasonPhrase);
+    }
+
+  }
+  Future<String> deleteEmployees()async{
+    http.Response response = await http.delete(Uri.parse("https://reqres.in/api/users/2"));
+    print("statusCode::${response.statusCode}");
+    if (response.statusCode == 204){
+      AppLog.d("Response::${http.StreamedResponse}");
+      var result = (response.body);
+      return result;
     }else{
       throw Exception(response.reasonPhrase);
     }

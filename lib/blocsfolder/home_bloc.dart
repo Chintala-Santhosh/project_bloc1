@@ -11,8 +11,9 @@ class HomeBloc extends Bloc<HomeEvent,BaseState> {
 
   HomeBloc({required BaseState initialState}) :super(initialState) {
     on <GetUserDetails>(_onGetHomePageDetail);
-    on <UpdateUserDetails>(_onUpdateUser);
     on <AddEmployeesDetails>(_onAddEmployeesDetails);
+    on <UpdateEmployeesDetails>(_onUpdateEmployees);
+    on <DeleteEmployeesDetails>(_onDeleteEmployeesDetails);
   }
 
   Future<void> _onGetHomePageDetail(event, Emitter<BaseState>emit) async {
@@ -26,22 +27,33 @@ class HomeBloc extends Bloc<HomeEvent,BaseState> {
     }
   }
 
-  Future<void> _onUpdateUser(event, Emitter<BaseState>emit) async {
+
+  Future<void> _onAddEmployeesDetails(event, Emitter<BaseState>emit) async {
     emit(Loading());
-    print("UpdateUserDetails");
+    print("AddEmployeesDetails");
     try {
-      final updateUsersList = await _repository.updateUsers(event.request);
-      emit(DataLoaded(data: updateUsersList, event: 'UpdateUserDetails'));
+      final updateUsersList = await _repository.addEmployeesDetails(event.request);
+      emit(DataLoaded(data: updateUsersList, event: 'AddEmployeesDetails'));
     } catch (e) {
       emit(Error(e.toString()));
     }
   }
-  Future<void> _onAddEmployeesDetails(event, Emitter<BaseState>emit) async {
+  Future<void> _onUpdateEmployees(event, Emitter<BaseState>emit) async {
     emit(Loading());
-    print("GetEmployeesDetails");
+    print("UpdateEmployeesDetails");
     try {
-      final updateUsersList = await _repository.addEmployeesDetails(event.request);
-      emit(DataLoaded(data: updateUsersList, event: 'AddEmployeesDetails'));
+      final updateUsersList = await _repository.updateEmployees(event.request);
+      emit(DataLoaded(data: updateUsersList, event: 'UpdateEmployeesDetails'));
+    } catch (e) {
+      emit(Error(e.toString()));
+    }
+  }
+  Future<void> _onDeleteEmployeesDetails(event, Emitter<BaseState>emit) async {
+    emit(Loading());
+    print("DeleteEmployeesDetails");
+    try {
+      final updateUsersList = await _repository.deleteEmployees();
+      emit(DataLoaded(data: updateUsersList, event: 'DeleteEmployeesDetails'));
     } catch (e) {
       emit(Error(e.toString()));
     }
